@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,13 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClienteController {
 
   @Autowired
-  ClienteService service;
+  private ClienteService service;
 
   @GetMapping
   public ResponseEntity<List<Cliente>> getAll() {
     List<Cliente> clientes = service.getAll();
 
     return ResponseEntity.status(HttpStatus.OK).body(clientes);
+  }
+
+  @PostMapping
+  public ResponseEntity<Cliente> create(@RequestBody Cliente cliente) {
+    Cliente saved = service.save(cliente);
+    return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
   }
 
 }
