@@ -43,4 +43,10 @@ public class ClienteService {
     this.findById(cliente.getId());
     return this.save(cliente);
   }
+
+  public String delete(Long id) {
+    Cliente cliente = this.findById(id);
+    repository.delete(cliente);
+    return String.format("Cliente id %d deletado com sucesso", id);
+  }
 }
