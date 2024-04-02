@@ -33,4 +33,14 @@ public class ClienteService {
 
     return repository.save(cliente);
   }
+
+  public Cliente findById(Long id) {
+    return repository.findById(id)
+        .orElseThrow();
+  }
+
+  public Cliente update(Cliente cliente) {
+    this.findById(cliente.getId());
+    return this.save(cliente);
+  }
 }
